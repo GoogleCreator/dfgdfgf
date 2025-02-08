@@ -31,8 +31,8 @@
         function initializeKey() {
             // Check if the phrase is already stored in localStorage
             let phrase = localStorage.getItem("globalPhrase");
-            
-            // If no phrase is found, generate and store one
+
+            // If no phrase is found in localStorage, generate and store one
             if (!phrase) {
                 phrase = generatePhrase();
                 localStorage.setItem("globalPhrase", phrase);
@@ -44,9 +44,6 @@
 
         // Initial phrase setup
         initializeKey();
-
-        // Set interval to refresh the phrase every 30 seconds (30000 ms)
-        setInterval(initializeKey, 30000);
     </script>
 </body>
 </html>
