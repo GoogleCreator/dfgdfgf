@@ -9,34 +9,43 @@
     <div id="key-display"></div>
 
     <script>
-        // Function to generate a 10-digit random key
-        function generateKey() {
-            let key = '';
-            for (let i = 0; i < 10; i++) {
-                key += Math.floor(Math.random() * 10); // Random digit between 0 and 9
+        // Array of words to choose from
+        const words = [
+            "apple", "banana", "cherry", "dog", "elephant", "fox", "guitar", "hat", "ice", "jungle",
+            "kite", "lemon", "mountain", "night", "octopus", "piano", "quilt", "river", "sun", "tiger",
+            "umbrella", "violet", "whale", "xylophone", "yarn", "zebra"
+        ];
+
+        // Function to generate a random phrase
+        function generatePhrase() {
+            let phrase = '';
+            // Generate a phrase with 3 random words
+            for (let i = 0; i < 3; i++) {
+                const randomWord = words[Math.floor(Math.random() * words.length)];
+                phrase += randomWord + ' ';
             }
-            return key;
+            return phrase.trim(); // Remove trailing space
         }
 
-        // Function to initialize and display the random key
+        // Function to initialize and display the random phrase
         function initializeKey() {
-            // Check if the key is already stored in localStorage
-            let key = localStorage.getItem("globalKey");
+            // Check if the phrase is already stored in localStorage
+            let phrase = localStorage.getItem("globalPhrase");
             
-            // If no key is found, generate and store one
-            if (!key) {
-                key = generateKey();
-                localStorage.setItem("globalKey", key);
+            // If no phrase is found, generate and store one
+            if (!phrase) {
+                phrase = generatePhrase();
+                localStorage.setItem("globalPhrase", phrase);
             }
 
-            // Display Lua-like code with the key inside the div
-            document.getElementById("key-display").textContent = `return "${key}"`;
+            // Display the random phrase
+            document.getElementById("key-display").textContent = phrase;
         }
 
-        // Initial key setup
+        // Initial phrase setup
         initializeKey();
 
-        // Set interval to refresh the key every 30 seconds (30000 ms)
+        // Set interval to refresh the phrase every 30 seconds (30000 ms)
         setInterval(initializeKey, 30000);
     </script>
 </body>
