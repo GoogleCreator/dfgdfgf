@@ -6,6 +6,13 @@
     <title>Global Key Generator</title>
     <style>
         /* Optional: Style the output to look like Lua code */
+        body {
+            font-family: "Courier New", monospace;
+            white-space: pre-wrap; /* To maintain the code-like structure */
+            font-size: 20px;
+            color: #2b7a2a; /* Dark green to resemble Lua code */
+            background-color: #f4f4f4; /* Light gray background for contrast */
+        }
     </style>
 </head>
 <body>
@@ -19,11 +26,12 @@
             return key;
         }
 
-        // Function to display and keep the key persistent across refreshes
-        function updateKey() {
+        // Function to initialize and display the random key
+        function initializeKey() {
+            // Check if the key is already stored in localStorage
             let key = localStorage.getItem("globalKey");
             
-            // If no key is found in localStorage, generate one and store it
+            // If no key is found, generate and store one
             if (!key) {
                 key = generateKey();
                 localStorage.setItem("globalKey", key);
@@ -34,10 +42,10 @@
         }
 
         // Initial key setup
-        updateKey();
+        initializeKey();
 
-        // Set interval to refresh the key every minute (60000 ms)
-        setInterval(updateKey, 60000); 
+        // Set interval to refresh the key every 30 seconds (30000 ms)
+        setInterval(initializeKey, 30000);
     </script>
 </body>
 </html>
