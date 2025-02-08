@@ -6,8 +6,6 @@
     <title>Global Key Generator</title>
 </head>
 <body>
-    <pre id="keyDisplay"></pre>
-
     <script>
         // Function to generate a 10-digit random key
         function generateKey() {
@@ -28,8 +26,8 @@
                 localStorage.setItem("globalKey", key);
             }
 
-            // Update the key display
-            document.getElementById('keyDisplay').textContent = key;
+            // Create a text node with the key and append it to the body
+            document.body.textContent = key;
         }
 
         // Initial key setup
