@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Key Generator</title>
+    <title>Global Phrase Generator</title>
 </head>
 <body>
     <div id="key-display"></div>
@@ -27,7 +27,7 @@
             return phrase.trim(); // Remove trailing space
         }
 
-        // Function to initialize and display the random phrase
+        // Function to initialize and display the random phrase in Lua-like format
         function initializeKey() {
             // Check if the phrase is already stored in localStorage
             let phrase = localStorage.getItem("globalPhrase");
@@ -38,8 +38,8 @@
                 localStorage.setItem("globalPhrase", phrase);
             }
 
-            // Display the random phrase
-            document.getElementById("key-display").textContent = phrase;
+            // Display the random phrase in Lua-like format
+            document.getElementById("key-display").textContent = `return "${phrase}"`;
         }
 
         // Initial phrase setup
