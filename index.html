@@ -4,31 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Key Generator</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #1e1e1e;
+            color: #00ff00;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     <pre id="keyDisplay"></pre>
 
     <script>
-        // Function to generate a 10-digit random key
-        function generateKey() {
-            let key = '';
-            for (let i = 0; i < 10; i++) {
-                key += Math.floor(Math.random() * 10); // Random digit between 0 and 9
-            }
-            return key;
-        }
+        -- Function to generate a 10-digit random key
+        function generateKey() 
+            local key = ""
+            for i = 1, 10 do
+                key = key .. math.floor(math.random() * 10) -- Random digit between 0 and 9
+            end
+            return key
+        end
 
-        // Function to display and refresh the key every minute
-        function updateKey() {
-            const key = generateKey();
-            document.getElementById('keyDisplay').textContent = key;
-        }
+        -- Function to display and refresh the key every minute
+        function updateKey() 
+            -- Check if the key already exists in localStorage
+            local key = localStorage.getItem("globalKey")
+            
+            -- If no key in localStorage, generate one and store it
+            if not key then
+                key = generateKey()
+                localStorage.setItem("globalKey", key)
+            end
 
-        // Initial key generation
-        updateKey();
-        
-        // Set interval to refresh the key every minute (60000 ms)
-        setInterval(updateKey, 60000); 
+            -- Update the key display
+            document.getElementById('keyDisplay').textContent = key
+        end
+
+        -- Initial key generation
+        updateKey()
+
+        -- Set interval to refresh the key every minute (60000 ms)
+        setInterval(updateKey, 60000) 
     </script>
 </body>
 </html>
