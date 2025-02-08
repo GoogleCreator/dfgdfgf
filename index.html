@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitelist System</title>
+</head>
+<body>
+    <h1>Welcome! You are being whitelisted...</h1>
+    <p id="status">Processing...</p>
+
+    <script>
+        // Simulate obtaining an HWID (since browsers can't access real HWIDs directly)
+        let hwid = "hwid-" + Math.random().toString(36).substr(2, 9);
+
+        // Send HWID to the server
+        fetch('/whitelist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ hwid: hwid })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('status').innerText = data.message;
+        })
+        .catch(error => {
+            document.getElementById('status').innerText = "Error processing HWID.";
+        });
+    </script>
+</body>
+</html>
