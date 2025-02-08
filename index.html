@@ -16,29 +16,31 @@
             "umbrella", "violet", "whale", "xylophone", "yarn", "zebra"
         ];
 
-        // Function to generate a random phrase
-        function generatePhrase() {
+        // Function to generate a deterministic global phrase
+        function generateGlobalPhrase() {
+            // Generate a phrase based on a fixed "seed" (we can use a fixed index in this case)
+            const fixedIndex = 7; // Fixed index to make it deterministic
             let phrase = '';
-            // Generate a phrase with 3 random words
+            // Choose 3 words based on fixed index
             for (let i = 0; i < 3; i++) {
-                const randomWord = words[Math.floor(Math.random() * words.length)];
-                phrase += randomWord + ' ';
+                const wordIndex = (fixedIndex + i) % words.length;
+                phrase += words[wordIndex] + ' ';
             }
             return phrase.trim(); // Remove trailing space
         }
 
-        // Function to initialize and display the random phrase in Lua-like format
+        // Function to initialize and display the global phrase in Lua-like format
         function initializeKey() {
-            // Check if the phrase is already stored in localStorage
+            // Get the global phrase from localStorage (same across all users)
             let phrase = localStorage.getItem("globalPhrase");
 
             // If no phrase is found in localStorage, generate and store one
             if (!phrase) {
-                phrase = generatePhrase();
+                phrase = generateGlobalPhrase();
                 localStorage.setItem("globalPhrase", phrase);
             }
 
-            // Display the random phrase in Lua-like format
+            // Display the global phrase in Lua-like format
             document.getElementById("key-display").textContent = `return "${phrase}"`;
         }
 
